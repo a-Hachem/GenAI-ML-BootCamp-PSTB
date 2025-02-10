@@ -4,11 +4,11 @@
 # number until the list length reaches length.
 
 # Solution 1: 
-# num, length = map(int, input("Enter tow numbers please (separated by a space): ").split())
-# liste=[]
-# for i in range(1, length+1):
-#     liste.append(num*i)
-# print(f"list of first {length} multiples of {num}: {liste}")
+num, length = map(int, input("Enter tow numbers please (separated by a space): ").split())
+liste=[]
+for i in range(1, length+1):
+    liste.append(num*i)
+print(f"list of first {length} multiples of {num}: {liste}")
 
 # Challenge 2 :
 #Write a program that asks a string to the user, 
