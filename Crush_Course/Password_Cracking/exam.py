@@ -17,7 +17,7 @@ for letter1 in letters:
 
         if unzip_with_7z(zip_file_path, dest_path, secret_password):
             print(f"Congratulation! Password found: {secret_password}")
-            exit()  # Arrêter le programme une fois le bon mot de passe trouvé
+            exit() 
 
 print(" No valid password found.")
 
