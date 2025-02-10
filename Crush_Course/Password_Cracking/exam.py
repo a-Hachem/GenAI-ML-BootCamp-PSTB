@@ -2,14 +2,14 @@ from utils import unzip_with_7z
 import string
 
 
-zip_file_path = 'congrats.7z'  # Garder tel quel
-dest_path = '.'  # Garder tel quel
+zip_file_path = 'congrats.7z'  
+dest_path = '.'  
 find_me = ""
 
 
-letters = string.ascii_lowercase  # Contain 'abcdefghijklmnopqrstuvwxyz'
+letters = string.ascii_lowercase  # Contains 'abcdefghijklmnopqrstuvwxyz'
 
-# This loop generate all combinations of two letters in the alphabet : 
+# This loop generate all combinations of two letters in the alphabet:
 for letter1 in letters:
     for letter2 in letters:
         find_me = letter1 + letter2  
