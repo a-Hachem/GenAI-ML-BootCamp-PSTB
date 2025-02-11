@@ -7,7 +7,7 @@ print(dictionary)
 
 # Exercie 2:
 family = {"rick": 43, 'beth': 13, 'morty': 5, 'summer': 8}
-# On définti d'abord une fonction qui calcul le prix à payer pour chacun selon sa tranche d'âge
+
 def ticket_price(age):
     ticket = 0
     if age < 3:
@@ -38,18 +38,11 @@ while True:
     print(family)  # Affiche le dictionnaire mis à jour
 
     
-# Exercie 3
-
 # Exercie 4:
 def describe_city(city, country="France"):
     print(f"The city of {city} is in {country}")
 
 describe_city("Paris")
-# Exercie 5:
-
-# Exercie 6:
-
-# Exercie 7:
 
 # Exercie 8:
 data = [
