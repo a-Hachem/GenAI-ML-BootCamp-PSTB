@@ -1,0 +1,8 @@
+evaluate==0.4.3
+peft==0.15.0
+scikit-learn==1.6.1
+sentence-transformers==4.0.1
+sentencepiece==0.2.0
+streamlit==1.43.2
+torch==2.6.0
+transformers==4.50.2
