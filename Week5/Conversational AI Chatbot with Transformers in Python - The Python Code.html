@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="origin-trial" content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A/kargTFyk8MR5ueravczef/wIlTkbVk1qXQesp39nV+xNECPdLBVeYffxrM8TmZT6RArWGQVCJ0LRivD7glcAUAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZzIiLCJleHBpcnkiOjE3NDIzNDIzOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9">
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" async="" charset="utf-8" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/recaptcha__fr.js.téléchargement" crossorigin="anonymous" integrity="sha384-u/I2iLGBWrO30B4DduvBUV4AtT/nwtwpACeHWCLiRwipeipXuecQkGpqx10cA9BR"></script><script type="text/javascript" async="" charset="utf-8" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/recaptcha__fr.js.téléchargement" crossorigin="anonymous" integrity="sha384-u/I2iLGBWrO30B4DduvBUV4AtT/nwtwpACeHWCLiRwipeipXuecQkGpqx10cA9BR"></script><script type="text/javascript" async="" charset="utf-8" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/recaptcha__fr.js.téléchargement" crossorigin="anonymous" integrity="sha384-u/I2iLGBWrO30B4DduvBUV4AtT/nwtwpACeHWCLiRwipeipXuecQkGpqx10cA9BR"></script><script type="text/javascript" async="" charset="utf-8" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/recaptcha__fr.js.téléchargement" crossorigin="anonymous" integrity="sha384-u/I2iLGBWrO30B4DduvBUV4AtT/nwtwpACeHWCLiRwipeipXuecQkGpqx10cA9BR"></script><script async="" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/js"></script>
+    
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4HYHLZBXLP');
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/css2" rel="stylesheet">
+    <link rel="shortcut icon" href="https://thepythoncode.com/static/img/python_logo.ico">
+    <link href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/prism.css">
+    <script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/bootstrap.min.js.téléchargement" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/clean-blog.css">
+    <link rel="stylesheet" href="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/promo-card.css">
+    <style>
+        .grecaptcha-badge { 
+            visibility: hidden !important;
+            right: 0px !important;
+        } 
+    </style>
+    
+<title>Conversational AI Chatbot with Transformers in Python - The Python Code</title>
+<meta name="description" content="Learn how to use Huggingface transformers library to generate conversational responses with the pretrained DialoGPT model in Python.">
+
+<meta name="author" content="Abdeladim Fadheli">
+
+<meta name="date" content="2021-05-12T07:25:14.883000+00:00">
+<meta name="category" content="Machine Learning, Natural Language Processing">
+<meta property="og:url" content="https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversational AI Chatbot with Transformers in Python - The Python Code">
+<meta property="og:description" content="Learn how to use Huggingface transformers library to generate conversational responses with the pretrained DialoGPT model in Python.">
+<meta property="og:image" content="https://thepythoncode.com/media/articles/chatbot-using-huggingface-transformers.jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="315">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ThePythonCode1">
+<meta name="twitter:title" content="Conversational AI Chatbot with Transformers in Python - The Python Code">
+<meta name="twitter:description" content="Learn how to use Huggingface transformers library to generate conversational responses with the pretrained DialoGPT model in Python.">
+<meta name="twitter:image" content="https://thepythoncode.com/media/articles/chatbot-using-huggingface-transformers.jpg">
+<meta name="twitter:image:alt" content="Conversational AI Chatbot with Transformers in Python">
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/api.js.téléchargement" async="" defer=""></script>
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/api(1).js.téléchargement" async="" defer=""></script>
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/api(2).js.téléchargement" async="" defer=""></script>
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/api(3).js.téléchargement" async="" defer=""></script>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var onloadCallback = function() {
+      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render ==='undefined') {
+        setTimeout(onloadCallback, 100);
+      } else {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LeWm7sUAAAAAAoyi0xFwTjfRWDi8lac_YxPJVxZ'
+        });
+      }
+    };
+    var onloadCallback2 = function() {
+      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render ==='undefined') {
+        setTimeout(onloadCallback2, 100);
+      } else {
+        grecaptcha.render('sidebar-button', {
+          'sitekey' : '6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs'
+        });
+      }
+    };
+    var onloadCallback3 = function() {
+      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render ==='undefined') {
+        setTimeout(onloadCallback3, 100);
+      } else {
+        grecaptcha.render('footer-button', {
+          'sitekey' : '6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs'
+        });
+      }
+    };
+    var onloadCallback4 = function() {
+        if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render ==='undefined') {
+            setTimeout(onloadCallback4, 100);
+        } else {
+            try {
+                grecaptcha.render('modal-button', {
+                    'sitekey': '6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs'
+                });
+            } catch (error) {}
+        }
+    };
+    // call them
+    onloadCallback();
+    onloadCallback2();
+    onloadCallback3();
+    onloadCallback4();
+  });
+</script>
+<style>pre .language-python {font-size: 15px;}</style>
+
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/clipboard.min.js.téléchargement"></script></head>
+<body class="" style="">
+    <!-- Navigation -->
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top is-fixed is-visible" id="mainNav" style="">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="https://thepythoncode.com/"><img style="width: 40px;height:40px;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/python_logo.svg" alt="Python Code">&nbsp;&nbsp;The Python Code</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="https://thepythoncode.com/">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://thepythoncode.com/articles?o=date">Tutorials</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="https://thepythoncode.com/articles?o=date">All Tutorials - Newest</a></li>
+            <li><a class="dropdown-item" href="https://thepythoncode.com/articles?o=views">All Tutorials - Popular</a></li>
+            <li><hr class="dropdown-divider"></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/ethical-hacking">Ethical Hacking</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/machine-learning">Machine Learning</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/general-python-topics">General Python Tutorials</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/web-scraping">Web Scraping</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/finance">Finance</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/computer-vision">Computer Vision</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/python-standard-library">Python Standard Library</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/using-apis-in-python">Application Programming Interfaces</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/using-databases-in-python">Database</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/game-development">Game Development</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/web-programming">Web Programming</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/digital-forensics-with-python">Digital Forensics</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/nlp">Natural Language Processing</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/healthcare">Healthcare</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/handling-pdf-files">PDF File Handling</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/python-for-multimedia">Python for Multimedia</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/gui-programming">GUI Programming</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/cryptography-with-python">Cryptography</a></li>
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/topic/scapy">Packet Manipulation Using Scapy</a></li>
+            
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python#">Tools</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="https://codingfleet.com/code-generator/python/"><i class="fas fa-code" style="width: 20px; height: 20px;"></i> Code Generator</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/code-assistant/python/"><i class="fas fa-robot" style="width: 20px; height: 20px;"></i> Code Assistant</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/code-explainer/python/"><i class="fas fa-lightbulb" style="width: 20px; height: 20px;"></i> Code Explainer</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/code-enhancer/python/"><i class="fas fa-wand-magic-sparkles" style="width: 20px; height: 20px;"></i> Code Enhancer</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/comment-generator/python/"><i class="fas fa-file-alt" style="width: 20px; height: 20px;"></i> Comment Generator</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/unit-test-generator/python/"><i class="fas fa-flask" style="width: 20px; height: 20px;"></i> Unit Test Generator</a></li>
+            <li><a class="dropdown-item" href="https://codingfleet.com/code-converter/python/"><i class="fas fa-exchange-alt" style="width: 20px; height: 20px;"></i> Code Converter</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://thepythoncode.lemonsqueezy.com/">EBooks</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/ethical-hacking-with-python-ebook">Ethical Hacking with Python EBook</a></li>
+            
+            
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/web-security-with-python-ebook">Web Security with Python EBook</a></li>
+            
+            
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/cryptography-with-python-ebook">Cryptography with Python EBook</a></li>
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/practical-python-pdf-processing-ebook">Practical Python PDF Processing EBook</a></li>
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/real-time-traffic-monitoring-ebook">Real-Time Traffic Monitoring System with YOLOv9 eBook</a></li>
+            
+            
+            
+            <li><a class="dropdown-item" href="https://thepythoncode.com/build-an-automatic-number-plate-recognition-system-with-opencv-and-yolo-ebook">Mastering YOLO: Build an Automatic Number Plate Recognition System</a></li>
+            
+            
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="https://thepythoncode.com/contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+  <header class="masthead" style="background-image: url(&#39;/media/articles/chatbot-using-huggingface-transformers.jpg&#39;)">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto" style="z-index: 1;">
+            <div class="site-heading">
+            <h1>Conversational AI Chatbot with Transformers in Python</h1>
+            <span class="sub-heading">Learn how to use Huggingface transformers library to generate conversational responses with the pretrained DialoGPT model in Python.</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+    
+
+    <div class="container-fluid px-md-5">
+        <div class="row">
+            <div class="col-12 col-md-10 col-xl-8 py-md-3 pl-md-6">
+            
+<span class="text-secondary" style="font-size:13px; margin-top:-3px;">
+    <i class="fas fa-user-tie">&nbsp;
+    </i>
+    <span class="text-capitalize">
+        
+            
+                
+                    <a href="https://thepythoncode.com/author/abdou-rockikz" rel="author">
+                        Abdeladim Fadheli 
+                    </a> ·
+                
+            
+        
+            </span>
+    <i aria-hidden="true" class="fa fa-clock">
+    </i>
+    8 min read
+    · Updated 
+    <span class="text-capitalize"> may 2023 </span>
+    <span id="n-views">· <i class="fas fa-eye"></i> 23.9K</span>
+    
+    · <a href="https://thepythoncode.com/topic/machine-learning" class="text-info" style="font-size:13px; margin-top:-3px;">Machine Learning</a>
+    
+    · <a href="https://thepythoncode.com/topic/nlp" class="text-info" style="font-size:13px; margin-top:-3px;">Natural Language Processing</a>
+    
+    
+</span>
+<br><br>
+<p style="font-family: Inter; font-size: 12pt;"><i>Welcome! Meet our <a class="code-assistant-text" target="_blank" href="https://codingfleet.com/code-assistant/python/">Python Code Assistant</a>, your new coding buddy. Why wait? Start exploring now!</i></p>
+
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><a title="Chatbots" href="https://en.wikipedia.org/wiki/Chatbot" target="_blank" rel="noopener">Chatbots</a> have gained a lot of popularity in recent years. As the interest grows in using chatbots for business, researchers also did a great job on advancing conversational AI chatbots.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">In this tutorial, we'll use the <a title="Huggingface transformers library" href="https://github.com/huggingface/transformers" target="_blank" rel="noopener">Huggingface transformers library</a> to employ the pre-trained <a title="DialoGPT model" href="https://arxiv.org/abs/1911.00536" target="_blank" rel="noopener">DialoGPT model</a> for conversational response generation.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">DialoGPT is a large-scale tunable neural conversational response generation model trained on 147M conversations extracted from Reddit. The good thing is that you can fine-tune it with your dataset to achieve better performance than training from scratch.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">This tutorial is about text generation in chatbots and not regular text. If you want open-ended generation, see <a title="Text Generation with Transformers in Python" href="https://thepythoncode.com/article/text-generation-with-transformers-in-python" target="_blank" rel="noopener">this tutorial</a> where I show you how to use GPT-2 and GPT-J models to generate impressive text.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Alright, to get started, let's install <span style="font-family: &#39;andale mono&#39;, monospace !important;">transformers</span>:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python">$ pip3 install transformers</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Open up a new Python file or notebook and do the following:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModelForCausalLM<span class="token punctuation">,</span> AutoTokenizer
+<span class="token keyword">import</span> torch
+
+<span class="token comment"># model_name = "microsoft/DialoGPT-large"</span>
+model_name <span class="token operator">=</span> <span class="token string">"microsoft/DialoGPT-medium"</span>
+<span class="token comment"># model_name = "microsoft/DialoGPT-small"</span>
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span>
+model <span class="token operator">=</span> AutoModelForCausalLM<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">There are three versions of DialoGPT; small, medium, and large. Of course, the larger, the better, but if you run this on your machine, I think small or medium fits your memory with no problems. I tried loading the large model, which takes about 5GB of my RAM. You can also use Google Colab to try out the large one.</span></p>
+<h2><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Generating Responses with Greedy Search</span></h2>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">In this section, we'll be using the <a title="greedy search algorithm" href="https://en.wikipedia.org/wiki/Greedy_algorithm" target="_blank" rel="noopener">greedy search algorithm</a> to generate responses. We select the chatbot response with the highest probability of choosing on each time step.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Let's make code for chatting with our AI using greedy search:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with greedy search</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the output</span>
+    output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Let's explain the core of this code:</span></p>
+<ul>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">We first take input from the user for chatting.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">We encode the text to <code>input_ids</code> using the DialoGPT tokenizer, we also append the end of the string token and return it as a Pytorch tensor.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">If this is the first time chatting with the bot, we directly feed <code>input_ids</code> to our model for a generation. Otherwise, we append the chat history using concatenation with the help of <code>torch.cat()</code> method.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">After that, we use the <code>model.generate()</code> method for generating the chatbot response.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Lastly, as the returned output is a tokenized sequence too, we decode the sequence using <code>tokenizer.decode()</code> and set <code>skip_special_tokens</code> to <code>True</code> to make sure we don't see any annoying special tokens such as <code>&lt;|endoftext|&gt;</code>. Also, since the model returns the whole sequence, we skip the previous chat history and print only the newly generated chatbot answer.</span></li>
+</ul>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Below is a sample discussion with the bot:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:How can you be rich so quickly?
+DialoGPT: I'm not rich, I'm just a rich man.
+&gt;&gt; You:Ok, you don't make sense, how old are you ?
+DialoGPT: I'm not a rich man, I'm just a rich man.
+&gt;&gt; You:How can you be happy ?
+DialoGPT: I'm not happy, I'm just a rich man.
+&gt;&gt; You:But they say money buys happiness!
+DialoGPT: Money buys happiness, but not happiness itself.
+&gt;&gt; You:You don't make sense again!
+DialoGPT: I'm not happy, I'm just a rich man.</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">You see the model repeats a lot of responses, as these are the highest probability, and it is choosing it every time.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">By default, <code>model.generate()</code> uses greedy search algorithm when no other parameters are set. In the following sections, we'll be adding some arguments to this method to see if we can improve the generation.</span></p>
+<p><em><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><strong>Learn also:</strong> <a title="How to Pretrain BERT using Transformers in Python" href="https://thepythoncode.com/article/pretraining-bert-huggingface-transformers-in-python" target="_blank" rel="noopener">How to Train BERT from Scratch using Transformers in Python.</a></span></em></p>
+<h2><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Generating Responses with Beam Search</span></h2>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><a title="Beam search" href="https://en.wikipedia.org/wiki/Beam_search" target="_blank" rel="noopener">Beam search</a> allows us to reduce the risk of missing high probability sequences by keeping the most likely <code>num_beams</code> of hypotheses at each time step and then taking the sequences that have the overall highest probability, below code will generate chatbot responses with beam search:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with beam search</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        num_beams<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+        early_stopping<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the output</span>
+    output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">When setting <code>num_beams</code> to <code>3</code> in <code>model.generate()</code> method, then we're going to select three words at each time step and develop them to find the highest overall probability of the sequence, setting <code>num_beams</code> to 1 is the same as greedy search.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Below is a sample discussion with the chatbot using beam search:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:How can I be rich?
+DialoGPT: You can't.
+&gt;&gt; You:Why not?
+DialoGPT: Because you can't.
+&gt;&gt; You:Then how am I supposed to live well?
+DialoGPT: You can't.
+&gt;&gt; You:So basically, you want me to be a poor guy?
+DialoGPT: No, I want you to be a rich guy.
+&gt;&gt; You:Ok how to be rich, then?
+DialoGPT: I don't know.</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<h2><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Generating Responses with Sampling</span></h2>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">We used beam and greedy search in previous sections to generate the highest probability sequence. Now that's great for tasks such as <a title="How to Perform Machine Translation using Transformers in Python" href="https://thepythoncode.com/article/machine-translation-using-huggingface-transformers-in-python" target="_blank" rel="noopener">machine translation</a> or <a title="text summarization" href="https://thepythoncode.com/article/text-summarization-using-huggingface-transformers-python" target="_blank" rel="noopener">text summarization</a> where the output is predictable. However, it is not the best option for an open-ended generation as in chatbots.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">For a better generation, we need to introduce some randomness where we sample from a wide range of candidate sequences based on probabilities:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with sampling</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        do_sample<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        top_k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the output</span>
+    output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">This time, we set <code>do_sample</code> to <code>True</code> for sampling, and we set <code>top_k</code> to <code>0</code> indicating that we're selecting all possible probabilities, we'll later discuss <code>top_k</code> parameter.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Here is a chat with these parameters:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:Hello, how can I be rich?
+DialoGPT: You can't
+&gt;&gt; You:Really? then how others get rich?
+DialoGPT: They work as money artists
+&gt;&gt; You:How to be a money artist?
+DialoGPT: I don't know, I don't have enough knowledge on artists
+&gt;&gt; You:Alright, thank you!
+DialoGPT: No problem, if you need tips pm me.
+&gt;&gt; You:Great, you're my savior!
+DialoGPT: Thank you for helping a stranger out like me!</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">There are some improvements. However, sampling on an exhaustive list of sequences with low probabilities can lead to random generation (like you see in the last sentence).</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">To improve it furthermore, we can:</span></p>
+<ul>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Lower the sampling <code>temperature</code> that helps us decrease the likelihood of picking low probability words and increase the likelihood of picking high probability words.</span></li>
+<li><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Use Top-k sampling instead of picking all probable occurrences. This will help us to discard low probability words from getting picked.</span></li>
+</ul>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with Top K sampling &amp; tweaking temperature</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        do_sample<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        top_k<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>
+        temperature<span class="token operator">=</span><span class="token number">0.75</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the output</span>
+    output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Now, we set <code>top_k</code> to <code>100</code> to sample from the top <code>100</code> words sorted descendingly by probability. We also set <code>temperature</code> to <code>0.75</code> (default is <code>1.0</code>) to give a higher chance of picking high probability words, setting the temperature to <code>0.0</code> is the same as greedy search; setting it to infinity is the same as completely random.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Here is a discussion with these parameters:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:How can I get rich?
+DialoGPT: I'd also like to know this.
+&gt;&gt; You:So you don't know it?
+DialoGPT: I know it, but it doesn't matter.
+&gt;&gt; You:Really? money matters, man!
+DialoGPT: Well, money is money and I gotta get my money.
+&gt;&gt; You:Yeah how to get them?
+DialoGPT: Well, that's a question. I'd like to know more, just for curiosity's sake, to know what other people have said about how I should get rich.
+&gt;&gt; You:Some robots like you told me you have to buy gold, silver or stocks.
+DialoGPT: I think my wallet is empty.</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">As you can see, it is much better now; feel free to tweak <code>temperature</code> and <code>top_k</code> parameters and see if it can improve it.</span></p>
+<p><em><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><strong>Related:</strong> <a title="How to Paraphrase Text using Transformers in Python" href="https://thepythoncode.com/article/paraphrase-text-using-transformers-in-python" target="_blank" rel="noopener">How to Paraphrase Text using Transformers in Python.</a></span></em></p>
+<h2><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Nucleus Sampling</span></h2>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><a title="Nucleus sampling" href="https://arxiv.org/abs/1904.09751" target="_blank" rel="noopener">Nucleus sampling</a> or Top-p sampling chooses from the smallest possible words whose cumulative probability exceeds the parameter <code>p</code> we set.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Below is an example using Top-p sampling:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with nucleus sampling &amp; tweaking temperature</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        do_sample<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        top_p<span class="token operator">=</span><span class="token number">0.95</span><span class="token punctuation">,</span>
+        top_k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>
+        temperature<span class="token operator">=</span><span class="token number">0.75</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the output</span>
+    output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">We set <code>top_k</code> to <code>0</code> to disable Top-k sampling, but you can use both methods, which works better. Here is a chat:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:How can I be rich fast?
+DialoGPT: Inflation and free money
+&gt;&gt; You:lol, but that takes time, I need fast money.
+DialoGPT: Your post makes no sense. You just need a lot of money to be rich fast
+&gt;&gt; You:Ok how to get a lot of money?
+DialoGPT: Buy gold and then trade it for money.
+&gt;&gt; You:Hmm, I got your point, thanks.
+DialoGPT: No problem. You have to have money to buy gold, but its only good for trading it.
+&gt;&gt; You:Yeah, I understand, thank you so much.
+DialoGPT: Ok, let me know if you need help</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Now the chatbot clearly makes sense in a lot of cases.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Now let's add some code to generate more than one chatbot response, and then we choose which response to include in the next input:</span></p>
+<div class="code-toolbar"><pre class=" language-python"><code class=" language-python"><span class="token comment"># chatting 5 times with nucleus &amp; top-k sampling &amp; tweaking temperature &amp; multiple</span>
+<span class="token comment"># sentences</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># take user input</span>
+    text <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"&gt;&gt; You:"</span><span class="token punctuation">)</span>
+    <span class="token comment"># encode the input and add end of string token</span>
+    input_ids <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>text <span class="token operator">+</span> tokenizer<span class="token punctuation">.</span>eos_token<span class="token punctuation">,</span> return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">)</span>
+    <span class="token comment"># concatenate new user input with chat history (if there is)</span>
+    bot_input_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>chat_history_ids<span class="token punctuation">,</span> input_ids<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> step <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> input_ids
+    <span class="token comment"># generate a bot response</span>
+    chat_history_ids_list <span class="token operator">=</span> model<span class="token punctuation">.</span>generate<span class="token punctuation">(</span>
+        bot_input_ids<span class="token punctuation">,</span>
+        max_length<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>
+        do_sample<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+        top_p<span class="token operator">=</span><span class="token number">0.95</span><span class="token punctuation">,</span>
+        top_k<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span>
+        temperature<span class="token operator">=</span><span class="token number">0.75</span><span class="token punctuation">,</span>
+        num_return_sequences<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span>
+        pad_token_id<span class="token operator">=</span>tokenizer<span class="token punctuation">.</span>eos_token_id
+    <span class="token punctuation">)</span>
+    <span class="token comment">#print the outputs</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>chat_history_ids_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      output <span class="token operator">=</span> tokenizer<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>chat_history_ids_list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>bot_input_ids<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> skip_special_tokens<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"DialoGPT </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">{</span>output<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    choice_index <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"Choose the response you want for the next input: "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    chat_history_ids <span class="token operator">=</span> torch<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span>chat_history_ids_list<span class="token punctuation">[</span>choice_index<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">I have set <code>num_return_sequences</code> to <code>5</code> to return five sentences at a time, we have to choose the one included in the following sequence. Here is how it went:</span></p>
+<div class="code-toolbar"><pre class=" language-markup" style="font-size: 12pt;"><code class=" language-markup">&gt;&gt; You:Hello, friend.
+DialoGPT 0: Hey there!
+DialoGPT 1: I am your friend, and I am also your friend.
+DialoGPT 2: Hello. :
+DialoGPT 3: Hiya! How are you?
+DialoGPT 4: Hello. I like your username.
+Choose the response you want for the next input: 3
+&gt;&gt; You:Fine, thanks, what about you?
+DialoGPT 0: Good. Not much to do.
+DialoGPT 1: Not much, you?
+DialoGPT 2: Fine, thanks.
+DialoGPT 3: I'm okay, thank you for asking.
+DialoGPT 4: I'm fine too.
+Choose the response you want for the next input: 2
+&gt;&gt; You:Can you tell me how can I get rich quickly?
+DialoGPT 0: Yes, I can!
+DialoGPT 1: Yes, just look up how to get rich on Google.
+DialoGPT 2: Just keep doing your thing. You'll get rich.
+DialoGPT 3: No, I can't.
+DialoGPT 4: no, i have no money
+Choose the response you want for the next input: 1
+&gt;&gt; You:Yeah, but I thought you have an answer...
+DialoGPT 0: I'm getting married in the morning.
+DialoGPT 1: How do you get rich?
+DialoGPT 2: I think there are many good answers, but I could send you one, if you want.
+DialoGPT 3: I will, thanks!
+DialoGPT 4: I thought you have an answer.
+Choose the response you want for the next input: 2
+&gt;&gt; You:Yes, please send me.
+DialoGPT 0: You can send me link.
+DialoGPT 1: I am very interested
+DialoGPT 2: I sent you a PM
+DialoGPT 3: I'll send you a PM
+DialoGPT 4: I am always interested in new ideas.
+Choose the response you want for the next input: 2</code></pre><div class="toolbar"><div class="toolbar-item"><button>Copy</button></div></div></div>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><em><strong>Related:</strong> <a title="Fine-tuning BERT for Semantic Textual Similarity with Transformers in Python" href="https://thepythoncode.com/article/finetune-bert-for-semantic-textual-similarity-in-python" target="_blank" rel="noopener">Fine-tuning BERT for Semantic Textual Similarity with Transformers in Python</a>.</em></span></p>
+<h2><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Conclusion</span></h2>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">And there you go. I hope this tutorial helped you out on how to generate text on DialoGPT and similar models. For more information on generating text, I highly recommend you read the <a title="How to generate text with Transformers" href="https://huggingface.co/blog/how-to-generate" target="_blank" rel="noopener">How to generate text with Transformers</a> guide.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">I'll leave you to tweak the parameters to see if you can make the bot performs better.</span></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Also, a great and exciting challenge for you is combining this with <a title="text to speech in Python" href="https://thepythoncode.com/article/convert-text-to-speech-in-python" target="_blank" rel="noopener">text-to-speech</a> and <a title="speech to text with Python" href="https://thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python" target="_blank" rel="noopener">speech-to-text</a> tutorials to <a title="building an AI virtual assistant with Python" href="https://skl.sh/3zxzAvK" target="_blank" rel="noopener">build a virtual assistant</a> like <a title="Alexa" href="https://developer.amazon.com/en-US/alexa" target="_blank" rel="noopener">Alexa</a>, <a title="Siri" href="https://www.apple.com/siri/" target="_blank" rel="noopener">Siri</a>,&nbsp; and <a title="Cortana" href="https://www.microsoft.com/en-us/cortana" target="_blank" rel="noopener">Cortana</a>!</span></p>
+<p><em><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;"><strong>Learn also:</strong> <a title="How to Fine Tune BERT for Text Classification using Transformers in Python" href="https://thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python" target="_blank" rel="noopener">How to Fine Tune BERT for Text Classification using Transformers in Python.</a></span></em></p>
+<p><span style="font-family: helvetica, arial, sans-serif; font-size: 12pt;">Happy learning ♥</span></p>
+<p><a title="Open in Colab" href="https://colab.research.google.com/drive/1KAg6X8RFHE0KSvFSZ__w7KGZrSqT4cZ3" target="_blank" rel="noopener"> <img style="box-sizing: border-box; border: 0px; vertical-align: middle; max-width: 100%; height: auto;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/colab-badge.svg" alt="Open in Colab"></a></p>
+<p style="font-family: Inter; font-size: 12pt;"><i>Just finished the article? Now, boost your next project with our <a class="code-generator-text" target="_blank" href="https://codingfleet.com/code-generator/python/">Python Code Generator</a>. Discover a faster, smarter way to code.</i></p>
+
+<a target="_blank" href="https://thepythoncode.com/code/conversational-ai-chatbot-with-huggingface-transformers-in-python" class="btn btn-outline-primary"><i class="fa fa-code"></i> View Full Code</a>
+<a target="_blank" id="code-assistant-link" href="https://codingfleet.com/code-assistant/python/" class="btn btn-outline-success">
+            <i class="fa fa-robot"></i> Fix My Code</a>
+
+
+<a target="_blank" rel="noopener" href="https://skl.sh/3zxzAvK" class="btn btn-outline-primary"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/skillshare.png" alt="Simply Easy Learning" width="35" height="35"> View on Skillshare</a>
+
+<div align="center">
+    <span style="font-size: 14px;">Sharing is caring!</span>
+    <br><br>
+    <a href="javascript:void(0);" class="fb-share">
+        <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="javascript:void(0);" class="twitter-share">
+        <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</div>
+<br><br>
+
+
+
+
+
+<h3 class="text-info">Read Also</h3><br>
+
+<div class="card" style="margin-top: 5px">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="https://thepythoncode.com/article/text-summarization-using-huggingface-transformers-python"><img class="card-img-top" style="padding: 0.35em" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/text-summarization-using-huggingface-transformers_ldqyycI.PNG" alt="How to Perform Text Summarization using Transformers in Python"></a>
+        </div>
+        <div class="col-sm">
+            <div class="card-body">
+                <a href="https://thepythoncode.com/article/text-summarization-using-huggingface-transformers-python" style="text-decoration: none;"><h4 class="card-title" style="margin: 0">How to Perform Text Summarization using Transformers in Python</h4></a>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="https://thepythoncode.com/article/text-summarization-using-huggingface-transformers-python" style="text-decoration: none;"><p class="text-secondary" style="font-size:15px;">Learn how to use Huggingface transformers and PyTorch libraries to summarize long text, using pipeline API and T5 transformer model in Python.</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card" style="margin-top: 5px">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="https://thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python"><img class="card-img-top" style="padding: 0.35em" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/finetune-bert-transformers-in-python.PNG" alt="How to Fine Tune BERT for Text Classification using Transformers in Python"></a>
+        </div>
+        <div class="col-sm">
+            <div class="card-body">
+                <a href="https://thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python" style="text-decoration: none;"><h4 class="card-title" style="margin: 0">How to Fine Tune BERT for Text Classification using Transformers in Python</h4></a>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="https://thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python" style="text-decoration: none;"><p class="text-secondary" style="font-size:15px;">Learn how to use HuggingFace transformers library to fine tune BERT and other transformer models for text classification task in Python.</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card" style="margin-top: 5px">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="https://thepythoncode.com/article/pretraining-bert-huggingface-transformers-in-python"><img class="card-img-top" style="padding: 0.35em" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/pretraining-bert-using-huggingface-transformers-in-python.jpg" alt="How to Train BERT from Scratch using Transformers in Python"></a>
+        </div>
+        <div class="col-sm">
+            <div class="card-body">
+                <a href="https://thepythoncode.com/article/pretraining-bert-huggingface-transformers-in-python" style="text-decoration: none;"><h4 class="card-title" style="margin: 0">How to Train BERT from Scratch using Transformers in Python</h4></a>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="https://thepythoncode.com/article/pretraining-bert-huggingface-transformers-in-python" style="text-decoration: none;"><p class="text-secondary" style="font-size:15px;">Learn how you can pretrain BERT and other transformers on the Masked Language Modeling (MLM) task on your custom dataset using Huggingface Transformers library in Python</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<h3>Comment panel</h3>
+<div class="row bootstrap snippets">
+    <div class="media-list"><li id="comment-1200" class="media border border-light" style="opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Aravind</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">4 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Thanks Abdou...Hope you continue with other variations in chatbot development. :)</span>
+            </div><button id="1200" data-comment-author="Aravind" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1201" class="media border border-light" style="margin-left: 50px; opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Abdou Rockikz</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">4 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Thanks Aravind! This is currently the state of the art chatbot among researchers, I may make another tutorial for fine tuning with other chatbot datasets soon.</span>
+            </div><button id="1200" data-comment-author="Abdou Rockikz" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1406" class="media border border-light" style="opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">jamie kidd</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Hi<br>I'm having trouble installing torch in pycharm</span>
+            </div><button id="1406" data-comment-author="jamie kidd" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1425" class="media border border-light" style="margin-left: 50px; opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Abdou Rockikz</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Hello Jamie,<br>I do not recommend using PyCharm on machine learning and deep learning projects (at least that's my opinion). I would go for simply VS code or Jupiter notebooks. So you'll have to install torch via pip and not the PyCharm package manager.<br>Hope this helps.</span>
+            </div><button id="1406" data-comment-author="Abdou Rockikz" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1873" class="media border border-light" style="margin-left: 50px; opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Priyansh Kumar</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Yes !!<br>I'm also recommending  Visual Studio Code IDE for best experience.</span>
+            </div><button id="1406" data-comment-author="Priyansh Kumar" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1578" class="media border border-light" style="opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Mouse</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Hi, really nice article!<br><br>I managed to get it working, but my IDE is throwing an error for 1 line, and when I try and modify the code (I'm trying to create a function instead of the for loop) it breaks because of this 1 line.<br><br>&gt;&gt; bot_input_ids = torch.cat([chat_history_ids, input_ids], dim=-1) if step &gt; 0 else input_ids<br><br>I'm not sure where chat_history_ids is coming from? They seem to be created later with: chat_history_ids = model.generate(..)<br><br>So this line feels like a chicken and egg scenario? Is that what the for loop is handling with: if step &gt; 0 else input_ids ?<br><br>IDE complains: Undefined name 'chat_history_ids'<br><br>I'm a bit confused about where the chat history is stored and how chat_history_ids  is being called by bot_input_ids before it's been created (if that makes sense)<br><br>Even though when I run the code 'as is' it seems to run fine; I keep running into trouble with that line when trying to make my own tweaks (I'm trying to write it as a function)<br><br>I'm still learning so apologie</span>
+            </div><button id="1578" data-comment-author="Mouse" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1608" class="media border border-light" style="margin-left: 50px; opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Abdou Rockikz</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Hey there!<br>First of all, thanks for the kind words! Appreciate your support.<br>You're right, chat_history_ids does not exist at the beginning, and "torch.cat([chat_history_ids, input_ids], dim=-1)" statement won't be called because the step is 0 and therefore bot_input_ids will be identical to input_ids since it's the first time we chat with the bot there isn't any chat history. (Python is dynamically typed and these kinds of errors won't raise, only some IDEs throws some warnings).<br>If the step is above 1, then we concatenate the chat history with the new user input, and so on. Hope this makes sense.</span>
+            </div><button id="1578" data-comment-author="Abdou Rockikz" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1609" class="media border border-light" style="opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Mouse</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Hey Abdou!<br><br>Thanks for the reply, you have indeed confirmed what I suspected about my IDE.<br>It seems like a silly question in hindsight, but I really wasn't sure if I was missing something.<br><br>This has been a great Python learning exercise for me, and I actually managed to get two chat bots talking to each other; one using your code and DialoGPT and the other using the Chatterbot Python library. (Just for fun and out of curiosity)<br><br>Some of the conversations they had were quite interesting and varied, and some were hilarious. I guess this is a consequence of training an AI on Reddit data!<br><br>I still have to prompt the first bot with human input first though; but after that I can pipe the bots replies to each other indefinitely or until Spacy crashes chatterbot.<br><br>It did get me thinking about how I'd go about getting the first bot to start the conversation, rather than me.<br>It was at this point that I fell down a deep philosophical black hole regarding how humans actually do this, and how to av</span>
+            </div><button id="1609" data-comment-author="Mouse" class="btn btn-link reply-button">Reply</button></li><br><li id="comment-1619" class="media border border-light" style="margin-left: 50px; opacity: 1;"><img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/default.PNG" alt="" class="img-circle" style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class="media-body">
+                <strong class="text-info" style="font-size: 12pt;">Abdou Rockikz</strong>
+                <span class="text-muted" style="font-size: 11pt;"><small class="text-muted">3 years ago</small></span><br>
+                <span style="font-size: 11.7pt;">Oh, It seems the character length stopped you from resuming sharing your idea, sorry for that!<br><br>A great project you did there! hmmm... I can't think of a way of starting the conversation automatically, and I guess human input is necessary.</span>
+            </div><button id="1609" data-comment-author="Abdou Rockikz" class="btn btn-link reply-button">Reply</button></li><br></div>
+    <div class="col-md-12 col-md-offset-2 col-sm-12">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">  
+                <div id="success"></div>
+                <div id="replies"></div>
+                <div id="name-invalid"></div>
+                <div id="email-invalid"></div>
+                <div id="content-invalid"></div>
+                <div class="panel-body">
+                    <div class="code-assistant-prompt">
+                        <p style="font-size: 12pt; font-family: Inter, Helvetica, sans-serif;"><i>Got a coding query or need some guidance before you comment? Check out this <a target="_blank" href="https://codingfleet.com/code-assistant/python/">Python Code Assistant</a> for expert advice and handy tips. It's like having a coding tutor right in your fingertips!</i></p>
+                    </div>
+                    <form>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="8qJvL0YeXMRJLBQqh1SRQUJ6uqtUy4kGDY4ZWJdTk8eNkCbmxLxPNFKteRmSkJsv">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <input class="form-control" placeholder="Enter your name" value="" type="text" name="name" required="" id="name">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-size: 10.7pt;"><i>Your email address will not be published.</i></label>
+                            <input class="form-control" placeholder="Enter Email" value="" type="email" name="email" required="" id="email">
+                        </div>
+                        <input type="hidden" name="reply-to" id="reply-to" value="">
+                        <textarea maxlength="5000" class="form-control" id="comment-content" placeholder="Write a comment..." rows="4"></textarea>
+                        <br>
+                        <div id="recaptcha-invalid"></div>
+                        <div id="html_element"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-wkxwpsy2xupi" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/anchor.html"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div>
+                        <br>
+                        <div class="control-group">
+                            <div class="form-group controls">
+                            <input type="checkbox" checked="checked" name="subscribe" id="subscribe">
+                            <label>Subscribe for our newsletter</label>
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" id="submit-comment" class="btn btn-outline-primary pull-right" value="Comment">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+            
+<div class="col-12 col-md-3 col-xl-3">
+    <br>
+    
+    
+    <a href="https://thepythoncode.com/build-an-automatic-number-plate-recognition-system-with-opencv-and-yolo-ebook?utm_source=topic-article&amp;utm_medium=banner&amp;utm_campaign=square-top" target="_blank" rel="noopener">
+        <img src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/mastering-yolo-banner.jpg" alt="Mastering YOLO - Topic - Top">
+    </a>
+    <br>
+    <br>
+    
+    
+    
+    
+    <!-- End Ezoic - sidebar - sidebar -->
+    <br>
+    <div class="modal-dialog modal-newsletter">
+		<div class="modal-content">
+			<form action="https://thepythoncode.com/subscribe" method="POST" id="form-sidebar">
+				<div class="modal-body text-center">
+                    <img style="width: 60px;height:60px;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/python_logo.svg">
+					<p style="font-family: Inter, sans-serif !important">Join 50,000+ Python Programmers &amp; Enthusiasts like you!</p>
+					<div class="form-group">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="8qJvL0YeXMRJLBQqh1SRQUJ6uqtUy4kGDY4ZWJdTk8eNkCbmxLxPNFKteRmSkJsv">
+                        
+    
+    
+      
+      <input type="email" name="email" class="form-control" placeholder="Enter your email" style="font-family: Inter, sans-serif !important;" required="" id="id_email">
+      
+      
+        
+      
+    
+  
+                        <input type="hidden" name="form" value="1">
+                        <input type="hidden" name="next" value="/article/conversational-ai-chatbot-with-huggingface-transformers-in-python">
+                        <br>
+                        <div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-ix1q0xjjck9j" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/anchor(1).html"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-1" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div><button class="btn btn-primary g-recaptcha" id="sidebar-button" style="font-family: Inter, sans-serif !important;" data-sitekey="6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs" data-callback="onSubmitSidebar" data-action="submit" type="submit">Subscribe</button>
+					</div>
+				</div>
+			</form>			
+		</div>
+	</div>
+    <br>
+    <h5 class="text-info">Tags</h5>
+    <div class="list-group">
+        <ul class="nav">
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/ethical-hacking"><li>Ethical Hacking</li></a>
+            
+            
+            
+            <a class="list-group-item" style="background-color: #3b93e6; color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/machine-learning"><li>Machine Learning</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/general-python-topics"><li>General Python Tutorials</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/web-scraping"><li>Web Scraping</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/finance"><li>Finance</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/computer-vision"><li>Computer Vision</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/python-standard-library"><li>Python Standard Library</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/using-apis-in-python"><li>Application Programming Interfaces</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/using-databases-in-python"><li>Database</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/game-development"><li>Game Development</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/web-programming"><li>Web Programming</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/digital-forensics-with-python"><li>Digital Forensics</li></a>
+            
+            
+            
+            <a class="list-group-item" style="background-color: #3b93e6; color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/nlp"><li>Natural Language Processing</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/healthcare"><li>Healthcare</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/handling-pdf-files"><li>PDF File Handling</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/python-for-multimedia"><li>Python for Multimedia</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/gui-programming"><li>GUI Programming</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/cryptography-with-python"><li>Cryptography</li></a>
+            
+            
+            
+            <a class="list-group-item" style="color: black; font-size: 9.5pt; text-decoration: none;" href="https://thepythoncode.com/topic/scapy"><li>Packet Manipulation Using Scapy</li></a>
+            
+            
+        </ul>
+    </div>
+    <br>
+    
+    
+    
+    
+    <!-- Ezoic - sidebar_middle 134 - sidebar_middle -->
+    
+    <br>
+    <h5><a href="https://thepythoncode.com/articles?o=date">New Tutorials</a></h5>
+    <div class="list-group">
+        <ul class="nav list-group-flush">
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/getting-started-with-python-for-saas-applications"><li>Getting Started with Python for SaaS Applications</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/nearshore-vs-offshore-software-development"><li>Nearshore vs Offshore: Cost-Effective Software Development</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/crafting-packets-with-scapy-in-python"><li>Crafting Dummy Packets with Scapy Using Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/building-a-tcp-proxy-with-python"><li>How to Build a TCP Proxy with Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/create-a-custom-netcat-in-python"><li>How to Build a Custom Netcat with Python</li></a>
+            
+        </ul>
+    </div>
+    <br>
+    <h5><a href="https://thepythoncode.com/articles?o=views">Popular Tutorials</a></h5>
+    <div class="list-group">
+        <ul class="nav list-group-flush">
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/using-speech-recognition-to-convert-speech-to-text-python"><li>How to Convert Speech to Text in Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/reading-emails-in-python"><li>How to Read Emails in Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/extract-pdf-tables-in-python-camelot"><li>How to Extract Tables from PDF in Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/write-a-keylogger-python"><li>How to Make a Keylogger in Python</li></a>
+            
+            <a class="list-group-item list-group-item-action" style="color: black;" href="https://thepythoncode.com/article/control-mouse-python"><li>How to Control your Mouse in Python</li></a>
+            
+        </ul>
+    </div>
+    <br>
+    <div class="sticky-top">
+        <br id="before-jobs">
+        
+        
+        
+        
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+        </div>
+    </div>
+    
+<br><br> 
+<footer class="mt-5" style="background-color: #16161A;"> 
+    <div class="container">
+        <div class="row justify-content-between position-relative">
+            <div class="col-12 col-lg-6 mb-3 pb-3 position-absolute top-0 end-0 translate-middle-y">
+                <form action="https://thepythoncode.com/subscribe" method="POST" id="form-footer" class="card p-4 d-flex flex-column gap-3 bg-dark rounded-2 d-block align-items-center align-items-lg-start text-center">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="8qJvL0YeXMRJLBQqh1SRQUJ6uqtUy4kGDY4ZWJdTk8eNkCbmxLxPNFKteRmSkJsv">
+                    <h4 style="text-align: center;" class="mb-0 text-white fw-bold">Subscribe to our Newsletter</h4>
+                    <p class="mb-0 mt-3 text-white text-center" style="font-size: 12.5pt;">Join 50,000+ Python Programmers &amp; Enthusiasts like you!</p>
+                    <label for="id_email" class="visually-hidden">Email address</label>
+                    <input id="id_email" name="email" type="email" class="form-control" placeholder="Enter your email" required="">
+                    <input type="hidden" name="form" value="3">
+                    <input type="hidden" name="next" value="/article/conversational-ai-chatbot-with-huggingface-transformers-in-python">
+                    <div><div class="grecaptcha-badge" data-style="none" style="width: 256px; height: 60px; position: fixed; visibility: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-gn43ooiuf3ok" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/anchor(2).html"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-2" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div><button class="btn btn-primary btn-primary-main mt-2 text-center g-recaptcha" id="footer-button" data-sitekey="6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs" data-callback="onSubmitFooter" data-action="submit" type="submit">Subscribe</button>                    
+                    <small style="color: grey; font-size: 10px;">This site is protected by reCAPTCHA and the Google 
+                        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                    </small>
+                </form>
+            </div>
+            <div class="col-12 mt-5 mb-3 mb-lg-5 pt-3">
+                <a class="navbar-brand" href="https://thepythoncode.com/" style="font-family: Inter,&#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"><img style="width: 40px;height:40px;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/python_logo.svg" alt="Python Code"><b>&nbsp;&nbsp;The Python Code</b></a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-3 text-white text-center text-sm-start">
+                <h5 class="text-info text-uppercase" style="font-family: &#39;Inter&#39;, sans-serif;font-size:18px;">EBooks</h5>
+                
+                
+                
+                
+                <a href="https://thepythoncode.com/ethical-hacking-with-python-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Ethical Hacking with Python EBook</p>
+                </a>
+                
+                
+                
+                
+                
+                <a href="https://thepythoncode.com/web-security-with-python-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Web Security with Python EBook</p>
+                </a>
+                
+                
+                
+                
+                
+                <a href="https://thepythoncode.com/cryptography-with-python-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Cryptography with Python EBook</p>
+                </a>
+                
+                
+                
+                <a href="https://thepythoncode.com/practical-python-pdf-processing-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Practical Python PDF Processing EBook</p>
+                </a>
+                
+                
+                
+                <a href="https://thepythoncode.com/real-time-traffic-monitoring-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Real-Time Traffic Monitoring System with YOLOv9 eBook</p>
+                </a>
+                
+                
+                
+                <a href="https://thepythoncode.com/build-an-automatic-number-plate-recognition-system-with-opencv-and-yolo-ebook">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif;font-size:15px;">Mastering YOLO: Build an Automatic Number Plate Recognition System</p>
+                </a>
+                
+                
+            </div>  
+            <div class="col-12 col-sm-6 col-lg-3 mb-3 text-white text-center text-sm-start">
+                <h5 class="text-info text-uppercase" style="font-family: &#39;Inter&#39;, sans-serif;font-size:18px;">Tools</h5>
+                <a href="https://codingfleet.com/code-generator/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Code Generator</p>
+                </a>
+                <a href="https://codingfleet.com/code-assistant/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Code Assistant</p>
+                </a>
+                <a href="https://codingfleet.com/code-explainer/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Code Explainer</p>
+                </a>
+                <a href="https://codingfleet.com/code-enhancer/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Code Enhancer</p>
+                </a>
+                <a href="https://codingfleet.com/comment-generator/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Comment Generator</p>
+                </a>
+                <a href="https://codingfleet.com/unit-test-generator/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Unit Test Generator</p>
+                </a>
+                <a href="https://codingfleet.com/code-converter/python/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Python Code Converter</p>
+                </a>
+                <a href="https://codingfleet.com/public-generations/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Useful Code Snippets</p>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-3 text-white text-center text-sm-start">
+                <h5 class="text-info text-uppercase" style="font-family: &#39;Inter&#39;, sans-serif;font-size:18px;">Navigation</h5>
+                <a href="https://thepythoncode.com/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Home</p>
+                </a>
+                <a href="https://thepythoncode.com/articles?o=date">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Tutorials</p>
+                </a>
+                <a href="https://thepythoncode.com/write-with-us">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Write with Us</p>
+                </a>
+                <a href="https://thepythoncode.com/about">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">About Us</p>
+                </a>
+                <a href="https://thepythoncode.com/contact">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Contact Us</p>
+                </a>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3 mb-3 text-white text-center text-sm-start">
+                <h5 class="text-info text-uppercase" style="font-family: &#39;Inter&#39;, sans-serif;font-size:18px;">Useful Links</h5>
+                <a href="https://thepythoncode.com/privacy-policy">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Privacy Policy</p>
+                </a>
+                <a href="https://www.thepythoncode.com/direct-sales.html">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">Advertise</p>
+                </a>
+                <a href="https://codingfleet.com/">
+                    <p style="margin-bottom: 7px;margin-top: 19px; font-family: &#39;Inter&#39;, sans-serif; font-size: 15px;">AI-powered Coding</p>
+                </a>
+                <br>
+                <ul class="list-unstyled d-flex gap-3 justify-content-center justify-content-sm-start">
+                    <li><a class="link-body-emphasis" href="https://twitter.com/ThePythonCode1"><i class="fa-brands fa-square-x-twitter fa-2xl" style="color: #ffffff;"></i></a></li>
+                    <li><a class="link-body-emphasis" href="https://github.com/x4nth055"><i class="fa-brands fa-square-github fa-2xl" style="color: #ffffff;"></i></a></li>
+                    <li><a class="link-body-emphasis" href="https://www.facebook.com/thepythoncode"><i class="fa-brands fa-square-facebook fa-2xl" style="color: #ffffff;"></i></a></li>
+                </ul> 
+            </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-center text-white pt-4 border-top">
+            <p class="copyright text-info" style="font-family: Inter, Helvetica, sans-serif;">© 2025 The Python Code. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/clean-blog.min.js.téléchargement"></script>
+    <script>
+        function onSubmitFooter(token) {
+          document.getElementById("form-footer").submit();
+        }
+
+        function onSubmitModal(token) {
+            document.getElementById("form-modal").submit();
+        }
+
+        function onSubmitSidebar(token) {
+            document.getElementById("form-sidebar").submit();
+        }
+    </script>
+    
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/prism.js.téléchargement"></script>
+
+
+<div id="myModal" class="modal fade" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-newsletter">
+		<div class="modal-content">
+			<form action="https://thepythoncode.com/subscribe" method="POST" id="form-modal">
+				<div class="modal-header justify-content-center">
+					<button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
+				</div>
+				<div class="modal-body text-center">
+                    <img style="width: 60px;height:60px;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/python_logo.svg">
+					<p style="font-family: Inter, sans-serif !important">Subscribe to our newsletter to get free Python guides and tutorials!</p>
+					<div class="form-group">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="8qJvL0YeXMRJLBQqh1SRQUJ6uqtUy4kGDY4ZWJdTk8eNkCbmxLxPNFKteRmSkJsv">
+                        
+    
+    
+      
+      <input type="email" name="email" class="form-control" placeholder="Enter your email" style="font-family: Inter, sans-serif !important;" required="" id="id_email">
+      
+      
+        
+      
+    
+  
+                        <input type="hidden" name="form" value="2">
+                        <input type="hidden" name="next" value="/article/conversational-ai-chatbot-with-huggingface-transformers-in-python">
+                        <br>
+                        <div><div class="grecaptcha-badge" data-style="none" style="width: 256px; height: 60px; position: fixed; visibility: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-3wy6depq2dfm" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/anchor(3).html"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-3" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/saved_resource(4).html"></iframe></div><button class="btn btn-primary g-recaptcha" style="font-family: Inter, sans-serif !important;" id="modal-button" data-sitekey="6LdFTfgoAAAAAPs7nop43W6L6XwiMhoIDeAVquUs" data-callback="onSubmitModal" data-action="submit" type="submit">Subscribe</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/utils.js.téléchargement"></script>
+<script>
+    function share_facebook() {
+        window.open("https://www.facebook.com/sharer/sharer.php?u=https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python", "Popup", "location,status,scrollbars,resizable,width=800, height=500");  
+    }
+    function share_twitter() {
+        window.open("https://www.twitter.com/share?url=https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python", "Popup", "location,status,scrollbars,resizable,width=800, height=500");
+    }
+    function share(className, shareFunc, url) {
+        document.querySelectorAll(className).forEach(function(element) {
+            element.addEventListener('click', function() {
+                shareFunc();
+                fetch(url, {headers: {"X-Requested-With": "XMLHttpRequest"}})
+            });
+        });
+    }
+    share('.fb-share', share_facebook, '/count-fb-shares/134');
+    share('.twitter-share', share_twitter, '/count-twitter-shares/134'); 
+    fetch("/count-view/134", {headers: {"X-Requested-With": "XMLHttpRequest"}})
+        .then(response => response.text()) 
+        .then(data => {
+            if(data != "0") {
+                data = parseInt(data);
+                document.querySelector("#n-views").innerHTML = "· <i class='fas fa-eye'></i> " + nFormatter(data, 1);
+            }
+        });
+    
+    var modal = new bootstrap.Modal(document.getElementById('myModal'), {
+        keyboard: false
+    });
+    setTimeout(() => {
+        modal.show();
+    }, 12000);
+    document.querySelector('[data-dismiss="modal"]').addEventListener('click', () => modal.hide());
+    
+    let stripTags = (text) => {
+        let div = document.createElement("div");
+        div.innerHTML = text;
+        return div.textContent || div.innerText || "";
+    }
+    let fixTrailingSpaces = (text) => {
+        let splited_text = text.split("<br>");
+        let result_text_arr = [];
+        for(let i = 0; i < splited_text.length; i++) {
+            let t = splited_text[i];
+            let text_copy = (' ' + t).slice(1);
+            while(text_copy.startsWith(" ")) {
+                t = t.replace(" ", "&nbsp;");
+                text_copy = text_copy.slice(1);
+            }
+            result_text_arr = result_text_arr.concat([t]);
+        }
+        return result_text_arr.join("<br>");
+    }
+    let spawnBreaksAndLinks = (text) => {
+        let regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+        let matches = text.match(regex);
+        if(matches != null) {
+            for(let i = 0; i < matches.length; i++) {
+                let m = matches[i];
+                text = text.replace(m, `<a rel="ugc" href="` + m + `">` + m + `</a>&nbsp;`);
+            }
+        }
+        text = text.replace("\n", "<br>");
+        text = text.replace(/(\r\n|\n|\r)/gm, "<br>");
+        while(text.includes("<br><br><br>")) {
+            text = text.replace("<br><br><br>", "<br><br>");
+        }
+        text = fixTrailingSpaces(text);
+        return text
+    }
+    
+    let reply = (comment_id, author_name) => {
+        document.querySelector("#success").innerHTML = "";
+        document.querySelector("#reply-to").value = comment_id;
+        document.querySelector("#replies").innerHTML = `<div class='alert alert-primary alert-dismissible fade show' style='font-size: 11.7pt;' role='alert'><strong>Reply to @` + author_name + `</strong><button type="button" id="close-reply" class="btn-close" data-dismiss="alert" aria-label="Close"></button></div>`;
+    }
+    let bindReplyButton = () => {
+        let replyButtons = document.querySelectorAll(".reply-button");
+        if (replyButtons == null || replyButtons.length == 0) {
+            return;
+        }
+        for(let i = 0; i < replyButtons.length; i++) {
+            let replyButton = replyButtons[i];
+            replyButton.addEventListener("click", (e) => {
+                let comment_id = e.target.id;
+                let author_name = e.target.dataset.commentAuthor;
+                reply(comment_id, author_name);
+                window.location.replace("https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python#replies");
+                document.querySelector("#close-reply").addEventListener("click", () => {
+                    document.querySelector("#reply-to").value = "";
+                    // get the parent element of the button, the alert
+                    const alertEl = document.querySelector("#replies").firstElementChild;
+                    //add the class 'fade' and 'show' to the alert if it doesn't have it
+                    if (!alertEl.classList.contains("fade")) alertEl.classList.add("fade");
+                    if (!alertEl.classList.contains("show")) alertEl.classList.add("show");
+                    //remove the class 'show' after some time
+                    setTimeout(() => alertEl.classList.remove("show"), 200);
+                })
+            })
+        }
+    }
+    let submitComment = (email, name, subscribe, reply_to, content) => {
+        let token = '8qJvL0YeXMRJLBQqh1SRQUJ6uqtUy4kGDY4ZWJdTk8eNkCbmxLxPNFKteRmSkJsv';
+        fetch("/comment", {
+            method: "POST",
+            headers: {"X-CSRFToken": token, "X-Requested-With": "XMLHttpRequest", "Content-Type": "application/x-www-form-urlencoded"},
+            body: `email=${encodeURIComponent(email)}&name=${encodeURIComponent(
+                name
+                )}&subscribe=${encodeURIComponent(subscribe)}&content=${encodeURIComponent(
+                content
+                )}&reply_to=${encodeURIComponent(reply_to)}&article_id=${encodeURIComponent(
+                    "134"
+                )}&g_recaptcha_response=${encodeURIComponent(grecaptcha.getResponse())}`
+        }).then(response => response.text()).then(data => {
+            if(data == "success") {
+                queryComments();
+                document.querySelector("#success").innerHTML = `<div class='alert alert-success fade show' style='font-size: 11.7pt;' role='alert'>Your comment is pending for approval by the webmaster, we will soon send you an email once it's approved.</div> `;
+                document.querySelector("textarea#comment-content").value = "";
+            } else if(data == "captcha invalid") {
+                document.querySelector("#recaptcha-invalid").innerHTML = `<div class='alert alert-danger fade show' style='font-size: 11.7pt;' role='alert'>reCaptcha invalid, please verify again.</div> `;
+            }
+            grecaptcha.reset();
+        });
+    }
+    let getCommentHTML = (comment_id, author_image, author_name, date_published, content, reply_to_id=false, is_approved=true) => {
+        let relativeDate = timeDifference(new Date(), date_published);
+        let html = "";
+        if(reply_to_id != false) {
+            html += "<br>";
+        }
+        html += `<li id="comment-` + comment_id + `" class="media border border-light"`;
+        if(reply_to_id != false) {
+            html += ` style="margin-left: 50px;"`;
+        }
+        html += `><img src='` + author_image + `' alt='' class='img-circle' style="width: 13vmin; height: 11vmin; object-fit: cover; margin-right: 10px">
+            <div class='media-body'>
+                <strong class='text-info' style='font-size: 12pt;'>` + stripTags(author_name) + `</strong>
+                <span class='text-muted' style='font-size: 11pt;'><small class='text-muted'>` + relativeDate + `</small></span><br>
+                <span style='font-size: 11.7pt;'>` + spawnBreaksAndLinks(stripTags(content)) + `</span>
+            </div><button id="`;
+        if(is_approved) {
+            if(reply_to_id == false) {
+                html += comment_id;
+            } else {
+                html += reply_to_id;
+            }
+            html += `" data-comment-author="` + stripTags(author_name) + `" class='btn btn-link reply-button'>Reply</button></li>`;
+        } else {
+            html += comment_id + `" class='btn btn-warning approve-comment pull-right' style='margin: 20px'>APPROVE</button>
+            <button id="` + comment_id + `" class='btn btn-danger delete-comment pull-right' style='margin: 20px'>DELETE</button>`
+        }
+        if(reply_to_id == false) {
+            html += `<br>`;
+        }
+        return html;
+    }
+
+    let authorProfilePictures = [{'ehash': '954d358a0801fec851d710c1a16713131c8ee4b9fe2a72817ee97b9484783c30', 'profile_pic': '/media/authors/abdou3.jpg'}];
+    async function generateEmailHash(email) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(email.toLowerCase());
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(digest));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function getAuthorProfilePicture(email) {
+        // const emailHash = await generateEmailHash(email);
+        // const author = authorProfilePictures.find(author => author.ehash === emailHash);
+        // return author ? author.profile_pic : "/media/authors/default.PNG";
+        return "/media/authors/default.PNG";
+    }
+    let queryComments = async () => {
+        fetch("/comments/134", {headers: {"X-Requested-With": "XMLHttpRequest"}}) 
+        .then((response) => { return response.json(); })
+        .then(async (data) => {
+            let comments = data[0];
+            let replies = data[1];
+            var is_superuser = "False" == "True";
+            // check if there are any comments
+            if(comments.length == 0 || comments == null) {
+                return;
+            }
+            let updatedCommentContainer = document.createElement("div");
+            // id, date_published, author_name, content, reply_to_id
+            updatedCommentContainer.classList.add("media-list");
+            for (const comment of comments) {
+                var date_published = new Date(comment["date_published"]);
+                var author_image = "/media/authors/default.PNG";
+                if(comment["is_approved"]) {
+                    let comment_html = getCommentHTML(comment["id"], author_image, comment["author_name"], date_published, comment["content"]);
+                    updatedCommentContainer.innerHTML += comment_html;
+                } else if(! comment["is_approved"] && is_superuser) {
+                    let comment_html = getCommentHTML(comment["id"], author_image, comment["author_name"], date_published, comment["content"], false, is_approved=false);
+                    updatedCommentContainer.innerHTML += comment_html;
+                } 
+            }
+            if(replies.length != 0 && replies != null) {
+                for (const reply of replies) {
+                    var date_published = new Date(reply["date_published"]);
+                    var author_image = "/media/authors/default.PNG";
+                    if(reply["is_approved"]) {
+                        let comment_html = getCommentHTML(reply["id"], author_image, reply["author_name"], date_published, reply["content"], reply["reply_to_id"]);
+                        updatedCommentContainer.querySelector("li#comment-" + reply["reply_to_id"]).insertAdjacentHTML("afterend", comment_html);
+                    } else if(! reply["is_approved"] && is_superuser) {
+                        let comment_html = getCommentHTML(reply["id"], author_image, reply["author_name"], date_published, reply["content"], reply["reply_to_id"], is_approved=false);
+                        updatedCommentContainer.querySelector("li#comment-" + reply["reply_to_id"]).insertAdjacentHTML("afterend", comment_html);
+                    }
+                };
+            }
+            const currentCommentContainer = document.querySelector(".media-list");
+            currentCommentContainer.parentNode.replaceChild(updatedCommentContainer, currentCommentContainer);
+            
+            bindReplyButton();
+            let media = document.querySelectorAll(".media");
+            media.forEach((m) => {
+                fadeOut(m);
+                fadeIn(m);
+            });
+            media.forEach((m) => {
+                fadeOut(m);
+                fadeIn(m);
+            });
+        });
+    }
+    queryComments();
+    document.querySelector("input#submit-comment").addEventListener("click", (e) => {
+        document.querySelector("#success").innerHTML = "";
+        let name = stripTags(document.querySelector("input#name").value).trim();
+        let email = stripTags(document.querySelector("input#email").value).trim();
+        let subscribe = document.querySelector("input#subscribe").checked;
+        let reply_to = stripTags(document.querySelector("input#reply-to").value);
+        let content = stripTags(document.querySelector("textarea#comment-content").value).trim();
+        let email_regex = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+        let name_valid  = name.length > 2;
+        let email_valid = email_regex.test(email);
+        let content_valid = content.split(" ").length >= 2;
+        let nameValidEl = document.querySelector("#name-invalid");
+        let emailValidEl = document.querySelector("#email-invalid");
+        let contentValidEl = document.querySelector("#content-invalid");
+        if(!name_valid) {
+            nameValidEl.innerHTML = "<div class='alert alert-danger' style='font-size: 11.7pt;' role='alert'><li>Invalid Pseudo Name.</li></div>";
+        } else {
+            nameValidEl.innerHTML = "";
+        }
+        if(!email_valid) {
+            emailValidEl.innerHTML = "<div class='alert alert-danger' style='font-size: 11.7pt;' role='alert'><li>Invalid Email address.</li></div>";
+        } else {
+            emailValidEl.innerHTML = "";
+        }
+        if(!content_valid) {
+            contentValidEl.innerHTML = "<div class='alert alert-danger' style='font-size: 11.7pt;' role='alert'><li>Not enough words, only more than 2 words are acceptable.</li></div>";
+            e.preventDefault();
+            return false;
+        } else {
+            contentValidEl.innerHTML = "";
+        }
+        if(!email_valid || !name_valid || !content_valid) {
+            e.preventDefault();
+            return false;
+        }
+        document.querySelector("#replies").innerHTML = "";
+        document.querySelector("#reply-to").value = "";
+        contentValidEl.innerHTML = "";
+        emailValidEl.innerHTML = "";
+        nameValidEl.innerHTML = "";
+        document.querySelector("#recaptcha-invalid").innerHTML = "";
+        submitComment(email, name, subscribe, reply_to, content);
+        e.preventDefault();
+        return false;
+    });
+</script>
+
+    
+
+
+<div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility linear 0.3s, opacity 0.3s linear; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"><iframe title="Le test reCAPTCHA expire dans deux minutes" name="c-wkxwpsy2xupi" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="./Conversational AI Chatbot with Transformers in Python - The Python Code_files/bframe.html" style="width: 100%; height: 100%;"></iframe></div></div></body></html>

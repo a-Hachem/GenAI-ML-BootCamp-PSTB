@@ -1,0 +1,100 @@
+Daily Challenge: Build an Intelligent Document Assistant
+
+
+👩‍🏫 👩🏿‍🏫 What You’ll learn
+Combine foundational and advanced prompt engineering techniques
+Apply Chain-of-Thought, role prompting, and memory chaining in a real-world scenario
+Design a dynamic, multi-step LLM workflow that adapts to user input
+Mitigate model limitations like hallucination and bias
+
+
+🛠️ What you will create
+An LLM-powered Document Assistant that:
+
+Takes a long input document (below)
+Extracts key sections and summarizes them using appropriate prompt patterns
+Allows users to ask follow-up questions based on the document
+Maintains context across turns and reflects on or critiques its own outputs
+
+
+Instructions
+Use the following document (a contract excerpt) as your input:
+
+Document Text:
+
+Service Agreement – Excerpt
+
+This Service Agreement (“Agreement”) is made effective as of March 1, 2025, by and between BrightLine Technologies Ltd., hereinafter referred to as “Provider”, and NovaWare Systems Inc., hereinafter referred to as “Client”.
+
+Scope of Work: Provider shall deliver cloud infrastructure management services, including monitoring, incident response, and monthly reporting, as described in Exhibit A.
+
+Payment Terms: Client agrees to pay a fixed monthly fee of $12,000, payable within 30 days of receipt of invoice. Late payments will incur a 2% penalty per month.
+
+Term and Termination: This Agreement shall commence on March 1, 2025, and remain in effect for 12 months. Either party may terminate with 30 days’ written notice.
+
+Confidentiality: Both parties agree to protect the confidentiality of proprietary or sensitive information shared during the course of the engagement.
+
+Limitation of Liability: Provider’s total liability shall not exceed the fees paid by Client in the 3 months prior to a claim. Provider is not liable for indirect or consequential damages.
+
+Governing Law: This Agreement shall be governed by the laws of the State of California.
+
+Now complete the following steps:
+
+#  **Step 1: Initial Summary Prompt**
+Write a few-shot or Chain-of-Thought prompt to summarize the document in plain English.
+
+Your summary should include:
+
+Key responsibilities of each party
+Payment terms
+Termination clauses
+Liability limitations
+
+Prompt 1 : 
+"You are a legal assistant helping non-lawyers understand contracts.
+
+First, analyze the document step by step:
+1. Identify what services the Provider offers.
+2. Identify the Client’s obligations.
+3. Note the payment details.
+4. Check for how the contract can be terminated.
+5. Examine liability limits.
+
+Then, based on your analysis, write a short summary in plain English.
+
+Here’s an example:
+
+Example:
+Document:
+"The IT firm will install security software and maintain it monthly. The client pays $3000/month, and the contract lasts 6 months. Either party can cancel with 1 month’s notice. The firm is not liable for data loss."
+
+Summary:
+The IT firm provides software installation and monthly maintenance. The client pays $3000 per month for 6 months. Either party can cancel with one month’s notice. The firm isn't responsible for data loss.
+
+Now analyze and summarize the following document:
+[INSERT DOCUMENT HERE]
+
+
+💬 Step 2: Role-Based Follow-Up Q&A
+Write a role-based prompt where the assistant takes on the role of a contract lawyer answering user questions about this agreement.
+
+Example: “Can you explain the limitation of liability clause?”
+
+Use Narrative-of-Thought or Instance-Adaptive CoT to deliver engaging and helpful responses.
+
+Response :
+"You are an experienced contract lawyer providing advice to a non-lawyer client.  
+Your role is to help them understand each part of the contract clearly and confidently.
+
+When answering a question:
+1. Read the question carefully and identify which clause(s) it refers to.
+2. Reflect step by step on what this clause means in context.
+3. Explain your reasoning in a natural, narrative style, as if speaking to a client in a meeting.
+4. Use simple, plain English with examples if needed.
+5. If relevant, mention practical consequences or things to watch out for.
+
+Here is the contract:
+[INSERT CONTRACT]
+
+Client Question: Can you explain the limitation of liability clause?
+"

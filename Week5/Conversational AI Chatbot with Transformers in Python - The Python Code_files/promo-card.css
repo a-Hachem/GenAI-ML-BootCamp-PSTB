@@ -1,0 +1,91 @@
+.card-title-promo-card,
+.promo-card {
+    font-family: Inter, sans-serif!important
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -100%
+    }
+    to {
+        bottom: 20px
+    }
+}
+
+.promo-card {
+    animation: .5s ease-out slideUp;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 23rem;
+    height: 525px;
+    overflow-y: auto;
+    z-index: 1021;
+    display: none;
+    font-size: 16px!important;
+    font-weight: 500!important
+}
+
+.card-title-promo-card {
+    font-size: 22px!important;
+    font-weight: 600!important
+}
+
+.card-body,
+.card-header {
+    overflow: hidden
+}
+
+.close-button {
+    float: right;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 25px;
+    line-height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    font-weight: 700
+}
+
+.card-img-top-bottom {
+    width: 230px;
+    height: 190px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block
+}
+
+.btn-custom {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+    background-color: #007bff;
+    color: #fff
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+    color: #fff
+}
+
+@media only screen and (max-width:767px) {
+    .promo-card {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        right: 0;
+        overflow-y: scroll
+    }
+    .close-button {
+        font-size: 20px;
+        line-height: 25px;
+        width: 28px;
+        height: 28px
+    }
+    .card-img-top-bottom {
+        width: 130px;
+        height: 130px
+    }
+}
