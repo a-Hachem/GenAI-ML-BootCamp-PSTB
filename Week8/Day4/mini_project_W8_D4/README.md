@@ -32,8 +32,8 @@ Ce projet est une application Streamlit de démonstration d’un assistant IA ca
 
 ```bash
 # 1. Créer un environnement virtuel
-python -m venv .venv
-source .venv/bin/activate  # ou .venv\Scripts\activate sous Windows
+python -m venv my_venv
+source my_venv/bin/activate  # ou .venv\Scripts\activate sous Windows
 
 # 2. Installer les dépendances
 pip install -r requirements.txt
@@ -70,4 +70,4 @@ chatbot_pdf_gemini/
 
 ## ✨ Réalisé par
 
-> Carole – Bootcamp GenAI & Machine Learning 2025 (PSTB)
+> Aïcha Hachemi– Bootcamp GenAI & Machine Learning 2025 (PSTB)
